@@ -16,15 +16,36 @@ This repository serves as a comprehensive reference for documenting problems, bu
 ## 📖 Table of Contents
 
 ### 🔐 Security & SSH
-- [Complete Deployment and SSH Keys Guide](./server/deployment.md)
-- [Managing Multiple Deploy Keys on One Server](./server/multi_repo_ssh.md)
+- [Complete Deployment and SSH Keys Guide](./ssh/server_deployment.md)
+- [Managing Multiple Deploy Keys on One Server](./ssh/multi_repo_ssh.md)
 
 ---
 
 ## 📝 Problem Documentation Template
 
-When documenting a new problem, use the following template:
+When documenting a new problem, you can use either format:
 
+### Format 1: Tutorial/Guide Style (Like existing docs)
+```markdown
+# Problem Title
+
+Brief introduction explaining what this document covers.
+
+### Step 1: Description
+What needs to be done first.
+
+### Step 2: Action
+Detailed steps with code examples:
+```bash
+command here
+```
+
+### 💡 Tips
+- Important notes
+- Warnings
+```
+
+### Format 2: Problem-Solution Style
 ```markdown
 # Problem Title
 
@@ -51,6 +72,8 @@ Final outcome and confirmation that the problem is resolved.
 Useful links, documentation, and related resources
 ```
 
+**Note**: Use Format 1 for step-by-step guides and tutorials. Use Format 2 for documenting specific bugs or issues you encountered.
+
 ---
 
 ## 🗂️ Folder Structure
@@ -58,9 +81,10 @@ Useful links, documentation, and related resources
 ```
 .
 ├── README.md                 # This file - main index
-├── server/                   # Server-related problems and solutions
-│   ├── deployment.md
+├── ssh/                      # SSH and security-related problems and solutions
+│   ├── server_deployment.md
 │   └── multi_repo_ssh.md
+├── server/                   # Server-related problems and solutions
 ├── database/                 # Database problems and solutions
 ├── frontend/                 # Frontend problems and solutions
 ├── backend/                  # Backend problems and solutions
