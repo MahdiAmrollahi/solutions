@@ -26,7 +26,10 @@ This repository serves as a comprehensive reference for documenting problems, bu
 When documenting a new problem, you can use either format:
 
 ### Format 1: Tutorial/Guide Style (Like existing docs)
-```markdown
+
+Use this format for step-by-step guides and tutorials. Example structure:
+
+```
 # Problem Title
 
 Brief introduction explaining what this document covers.
@@ -36,17 +39,24 @@ What needs to be done first.
 
 ### Step 2: Action
 Detailed steps with code examples:
-```bash
-command here
-```
+
+[Use code blocks with appropriate language tags]
+bash commands here
+python code here
+etc.
 
 ### 💡 Tips
 - Important notes
 - Warnings
 ```
 
+**Note**: When writing actual documentation, use proper markdown code blocks with language tags (e.g., ` ```bash ` for bash commands).
+
 ### Format 2: Problem-Solution Style
-```markdown
+
+Use this format for documenting specific bugs or issues. Example structure:
+
+```
 # Problem Title
 
 ## 🔍 Problem Description
@@ -60,6 +70,7 @@ What went wrong? Errors, unexpected behaviors, etc.
 
 ## 🔧 Solution
 Detailed steps to resolve the problem.
+Include code examples and commands as needed.
 
 ## ✅ Result
 Final outcome and confirmation that the problem is resolved.
@@ -71,8 +82,6 @@ Final outcome and confirmation that the problem is resolved.
 ## 🔗 Resources
 Useful links, documentation, and related resources
 ```
-
-**Note**: Use Format 1 for step-by-step guides and tutorials. Use Format 2 for documenting specific bugs or issues you encountered.
 
 ---
 
