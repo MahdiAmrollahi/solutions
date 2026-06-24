@@ -2,11 +2,13 @@
 
 When you have multiple projects (e.g., a **Backend** and a **Frontend**) on a single VPS, GitHub won't allow you to use the same SSH key (Deploy Key) for both. You need a unique key for each and a configuration to handle them.
 
+> **All commands below run on the VPS**, not on your local machine. The VPS holds the private keys; GitHub only ever sees the public keys. This follows the same VPS-first principle as [`server_deployment.md`](./server_deployment.md).
+
 ---
 
-### 1️⃣ Step 1: Generate Unique Keys
+### 1️⃣ Step 1: Generate Unique Keys on the VPS
 
-Use the following commands to generate keys without a passphrase (automated use).
+SSH into your VPS and generate a key per repository. Use the `-N ""` flag to set an empty passphrase — this is **crucial for automated deployments** (a passphrase would block non-interactive `git pull`).
 
 **For Frontend:**
 
@@ -36,7 +38,7 @@ On your **VPS**, edit `~/.ssh/config` to define "Aliases" for each project. This
 Host github-backend
     HostName github.com
     User git
-    IdentityFile /root/.ssh/id_ed25519_backend
+    IdentityFile ~/.ssh/id_ed25519_backend
     IdentitiesOnly yes
     BatchMode yes
 
@@ -44,7 +46,7 @@ Host github-backend
 Host github-frontend
     HostName github.com
     User git
-    IdentityFile /root/.ssh/id_ed25519_frontend
+    IdentityFile ~/.ssh/id_ed25519_frontend
     IdentitiesOnly yes
     BatchMode yes
 ```
@@ -92,3 +94,31 @@ git clone git@github-frontend:your-username/frontend-repo.git
     ssh -T git@github-backend
     ssh -T git@github-frontend
     ```
+    A successful response for each looks like:
+    ```
+    Hi <username>/<repo-name>! You've successfully authenticated, but GitHub does not provide shell access.
+    ```
+
+---
+
+### 5️⃣ Step 5: Adapting Existing Repos Already Cloned with `github.com`
+
+If a repo was previously cloned with the plain `github.com` URL, repoint it to the correct alias **on the VPS**:
+
+```bash
+# From inside the repo on the VPS
+git remote set-url origin git@github-backend:your-username/backend-repo.git
+```
+
+Do this for each repo so the right key is used automatically.
+
+---
+
+### 📋 Quick Recap
+
+| Item                       | Lives On         | Path / Location                          |
+| :------------------------- | :--------------- | :--------------------------------------- |
+| Private keys               | **VPS**          | `~/.ssh/id_ed25519_backend`, `~/.ssh/id_ed25519_frontend` |
+| Public keys (locks)        | **GitHub**       | Each repo > Settings > Deploy keys       |
+| SSH config aliases         | **VPS**          | `~/.ssh/config`                          |
+| Cloned repos               | **VPS**          | `/var/www/<project>` (or your app path)  |
